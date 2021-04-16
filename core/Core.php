@@ -7,6 +7,9 @@ class Core
         if(isset($_GET['url'])){
             $url .= filter_input(INPUT_GET, 'url');
         }
+
+        $Params = array();
+        
         if(!empty($url) && $url != '/'){
             $url = explode('/', $url);
             array_shift($url);
@@ -16,8 +19,13 @@ class Core
 
             if(isset($url[0]) &&  !empty($url[0])){
                 $CurrentAction = $url[0];
+                array_shift($url);
             }else{
                 $CurrentAction = 'index';
+            }
+
+            if(count($url)>0){
+                $Params = $url;
             }
 
         }else{
@@ -27,9 +35,9 @@ class Core
         }
 
 
-        echo '<hr>';
-        echo 'Controller '.$CurrentController.'<br>';
-        echo 'Action '.$CurrentAction;
+        $C  = new $CurrentController();
+
+        call_user_func_array(array($C, $CurrentAction), $Params);
         
     }
 }
