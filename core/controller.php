@@ -1,6 +1,7 @@
 <?php
 class Controller{
     public function loadView($ViewName, $ViewData = array()){
+        extract($ViewData);
         require 'views/'.$ViewName.'.php';
     }
 
@@ -8,9 +9,12 @@ class Controller{
         require 'views/template.php';
     }
 
+    /*
     public function loadViewTemplate($ViewName, $ViewData = array()){
         extract($ViewData);
          
         require 'views/'.$ViewName.'.php';
     }
+
+    */
 }
