@@ -34,6 +34,11 @@ class Core
 
         }
 
+        if(!file_exists('controllers/'.$CurrentController.'.php') || !method_exists($CurrentController, $CurrentAction)){
+            $CurrentController = 'notFoundController';
+            $CurrentAction = 'index';
+        }
+
 
         $C  = new $CurrentController();
 
